@@ -42,6 +42,9 @@ COPY data/sites /template/sites
 COPY app/modules /app/modules
 COPY app/config /app/config
 COPY app/themes /app/themes
+COPY app/content /app/content
+
+RUN chmod 777 /app/content
 
 RUN \
   for I in profiles sites; do \
