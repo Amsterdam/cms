@@ -15,7 +15,8 @@ WORKDIR /opt/drupal
 COPY composer.json composer.lock ./
 
 # Composer is available in the Drupal image, we can just run it without the need to install it
-RUN composer install --ansi --no-interaction --no-cache --no-suggest
+RUN composer install --ansi --no-interaction --no-cache --no-suggest --optimize-autoloader && \
+  composer clearcache
 
 RUN rm -rf /template/sites
 COPY data/sites /template/sites
