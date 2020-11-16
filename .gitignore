@@ -9,3 +9,4 @@ app/shared/*
 /modules
 /.editorconfig
 /.gitattributes
+composer.phar
