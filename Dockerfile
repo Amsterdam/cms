@@ -1,65 +1,49 @@
-FROM drupal:8.9.1-apache
+FROM drupal:8.9.8-apache
 
-#
-ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_MEMORY_LIMIT -1
-
-# Set workdir
-WORKDIR /var/www/html/
-
-## Install
-RUN apt update && apt install -y git unzip
-
-# Install composer, require the elasticsearch dependencies
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer config --global repo.packagist composer https://packagist.org \
-    && composer --ansi --version --no-interaction
-
-RUN composer require symfony/dom-crawler:^3.4
-
-# Install drupal cli
-RUN composer require drupal/console:~1.9.4 --prefer-dist --optimize-autoloader \
-    && curl https://drupalconsole.com/installer -L -o drupal.phar \
-    && mv drupal.phar /usr/local/bin/drupal \
-    && chmod +x /usr/local/bin/drupal \
-    && drupal list | grep ^Drupal
-
-# Install drush cli
-RUN curl -OL https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar \
-    && mv drush.phar /usr/local/bin/drush \
-    && chmod +x /usr/local/bin/drush \
-    && composer require drush/drush \
-    && drush version
-
-# Install required module dependencies
-RUN COMPOSER_MEMORY_LIMIT=-1 composer require "drupal/elasticsearch_connector:^6" \
-      "nodespark/des-connector:^6" "drupal/search_api" \
-      "webonyx/graphql-php" \
-      "drupal/graphql_search_api"
-
-RUN composer info
-
+RUN apt update && \
+  apt install -y git unzip && \
+  rm -rf /var/lib/apt/lists
 
 COPY data/php/conf.d/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+
+RUN curl -OL https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar && \
+  mv drush.phar /usr/local/bin/drush && \
+  chmod +x /usr/local/bin/drush
+
+WORKDIR /opt/drupal
+
+COPY composer.json composer.lock ./
+
+# Composer is available in the Drupal image, we can just run it without the need to install it
+RUN composer install --ansi --no-interaction --no-cache --no-suggest --optimize-autoloader && \
+  composer clearcache
+
+RUN rm -rf /template/sites
 COPY data/sites /template/sites
-COPY app/modules /app/modules
+
+RUN rm -rf /app/config
 COPY app/config /app/config
+
+RUN rm -rf /app/themes
 COPY app/themes /app/themes
+
+WORKDIR /opt/drupal/web
 
 RUN \
   for I in profiles sites; do \
-    rm -rf /var/www/html/$I; \
-    ln -s /app/shared/$I /var/www/html/$I; \
-  done \
-  && rm -rf /var/www/html/modules \
-  && ln -s /app/modules /var/www/html/modules \
-  && ln -s /app/themes /var/www/html/themes
+  rm -rf ./$I; \
+  ln -s /app/shared/$I ./$I; \
+  done
+
+RUN rm -rf ./themes && \
+  ln -s /app/themes ./themes
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 
-# Extra Apache configs
+RUN mkdir /var/log/apache2/drupal/
+
 COPY data/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod proxy proxy_http cache_disk headers
 
-ENTRYPOINT [ "/entrypoint.sh"]
+CMD ["/entrypoint.sh"]
