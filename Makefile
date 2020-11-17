@@ -7,13 +7,6 @@ define _composer
 	@COMPOSER_MEMORY_LIMIT=-1 php ./composer.phar ${1} ${2}
 endef
 
-_do_import:
-ifdef DB_FILE
-	@docker-compose exec -T database pg_restore -C --clean --no-acl --no-owner -U postgres -d cms < ${DB_FILE}
-else
-	@echo -e "No filename given for database source file"
-endif
-
 # PHONY prevents filenames being used as targets
 .PHONY: help info rebuild status start stop restart build import_db shell
 
@@ -52,7 +45,13 @@ rebuild: stop build start status ## stop running containers, build and start the
 shell: ## execute command on container. Usage: make CONTAINER=database shell
 	docker-compose exec ${CONTAINER} sh
 
-import_db: _do_import update ## import postgres database. Usage: make DB_FILE=psql.gz import_db
+import_db: ## import postgres database. Usage: make DB_FILE=psql.gz import_db
+ifdef DB_FILE
+	@docker-compose exec -T database dropdb --if-exists -e -U postgres cms
+	@docker-compose exec -T database pg_restore -C --clean --no-acl --no-owner -U postgres -d cms < ${DB_FILE}
+else
+	@echo -e "No filename given for database source file"
+endif
 
 composer_install: ## Install all composer dependencies
 ifneq ("$(wildcard composer.phar)","")
