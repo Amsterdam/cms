@@ -1,7 +1,4 @@
 <?php
-
-error_reporting(E_ALL);
-
 // @codingStandardsIgnoreFile
 
 $settings['hash_salt'] = getenv('DRUPAL_HASH_SALT');
