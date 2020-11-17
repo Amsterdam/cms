@@ -35,6 +35,12 @@ An instance's configuration can be exported from `{{CMS_URL}}/admin/config/devel
 make import_config
 ```
 
+After importing the database of configuration, make sure to run the update command to fix any broken references:
+
+```
+make update
+```
+
 Both the commands `import_db` and `import_config`
 
 ## Updating or requiring modules
