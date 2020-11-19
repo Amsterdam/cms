@@ -16,8 +16,11 @@ help: ## show this help screen
 info: ## dump Makefile variables to screen
 	@echo -e $(_MAKEFILE_VARIABLES)
 
+build_nocache: ## Build the container by pulling the image from source instead from cache
+	docker-compose build --pull --no-cache
+
 build: ## build Docker Compose images
-	docker-compose build --pull
+	docker-compose build
 
 start: ## start single Docker Compose service in detached mode
 	docker-compose up -d
