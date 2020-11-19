@@ -8,7 +8,8 @@ cp -rv /template/sites/* /app/shared/sites/
 chown -R www-data:www-data /app/shared/*
 chown -R www-data:www-data /app/config
 
-cd /opt/drupal/web && make update
+# In case modules have changed, perform a database update
+drush updb -y && drush cache-rebuild
 
 # Startup Script
 apache2-foreground

@@ -1,4 +1,4 @@
-FROM drupal:8.9.8-apache
+FROM drupal:8.9.9-apache
 
 RUN apt update && \
   apt install -y git unzip && \

@@ -17,7 +17,7 @@ info: ## dump Makefile variables to screen
 	@echo -e $(_MAKEFILE_VARIABLES)
 
 build: ## build Docker Compose images
-	docker-compose build
+	docker-compose build --pull
 
 start: ## start single Docker Compose service in detached mode
 	docker-compose up -d
