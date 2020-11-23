@@ -23,7 +23,7 @@ build: ## build Docker Compose images
 	docker-compose build
 
 start: ## start single Docker Compose service in detached mode
-	docker-compose up -d
+	docker-compose up
 
 stop: ## stop Docker Compose
 	docker-compose down --remove-orphans
@@ -51,7 +51,7 @@ shell: ## execute command on container. Usage: make CONTAINER=database shell
 import_db: ## import postgres database. Usage: make DB_FILE=psql.gz import_db
 ifdef DB_FILE
 	@docker-compose exec -T database dropdb --if-exists -e -U postgres cms
-	@docker-compose exec -T database pg_restore -C --clean --no-acl --no-owner -U postgres -d cms < ${DB_FILE}
+	@docker-compose exec -T database pg_restore --clean --no-acl --no-owner --username=postgres -d postgres < ${DB_FILE}
 else
 	@echo -e "No filename given for database source file"
 endif
