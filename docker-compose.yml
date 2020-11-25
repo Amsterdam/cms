@@ -32,10 +32,8 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./app/themes:/app/themes
       - ./app/config:/app/config
       - ./app/shared/profiles:/app/shared/profiles
-      - ./app/shared/sites:/app/shared/sites
     environment:
       DRUPAL_DBNAME: cms
       DRUPAL_DBHOST: database
