@@ -1,7 +1,7 @@
 parameters:
   cors.config:
     enabled: true
-    allowedHeaders: ['accept', 'authorization', 'origin']
+    allowedHeaders: ['accept', 'accept-encoding', 'content-type', 'content-encoding', 'authorization', 'origin']
     allowedMethods: ['GET']
     allowedOrigins: ['https://data.amsterdam.nl', 'https://acc.data.amsterdam.nl', 'http://localhost:3000']
     exposedHeaders: false
