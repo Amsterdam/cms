@@ -1,9 +1,24 @@
 parameters:
   cors.config:
     enabled: true
-    allowedHeaders: ['accept', 'accept-encoding', 'content-type', 'content-encoding', 'authorization', 'origin']
-    allowedMethods: ['GET']
-    allowedOrigins: ['https://data.amsterdam.nl', 'https://acc.data.amsterdam.nl', 'http://localhost:3000']
+    allowedHeaders:
+      [
+        "accept",
+        "accept-encoding",
+        "content-type",
+        "content-encoding",
+        "authorization",
+        "origin",
+      ]
+    allowedMethods: ["GET"]
+    allowedOrigins:
+      [
+        "https://data.amsterdam.nl",
+        "https://acc.data.amsterdam.nl",
+        "https://cms.data.amsterdam.nl",
+        "https://acc.cms.data.amsterdam.nl",
+        "http://localhost:3000",
+      ]
     exposedHeaders: false
     maxAge: false
     supportsCredentials: false
