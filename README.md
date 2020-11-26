@@ -9,7 +9,7 @@ The CMS backend will be used by editors to publish the editorial content. The ed
 
 ## Setting up the CMS locally
 
-Use the `Makefile` commands to spin up the containers. Run `make` or `make list` to list the available commands. Note that, to have the CMS fully functional, both the database dump and the site's configuration need to be imported/available.
+Use the `Makefile` commands to spin up the containers. Run `make` to list the available commands. Note that, to have the CMS fully functional, both the database dump and the site's configuration need to be imported/available.
 
 ### Build the containers
 
@@ -40,8 +40,6 @@ After importing the database of configuration, make sure to run the update comma
 ```
 make update
 ```
-
-Both the commands `import_db` and `import_config`
 
 ## Updating or requiring modules
 
