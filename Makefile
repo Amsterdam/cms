@@ -76,6 +76,6 @@ composer_require: ## Require a specific dependency. Usage: make composer_require
 ifneq ("$(wildcard composer.phar)","")
 	${call _composer, "require" ${package}}
 else
-  ${shell ./install_composer.sh}
+	${shell ./install_composer.sh}
 	${call _composer, "update" ${package}}
 endif
