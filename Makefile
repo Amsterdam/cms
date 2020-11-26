@@ -58,18 +58,18 @@ endif
 
 composer_install: ## Install all composer dependencies
 ifneq ("$(wildcard composer.phar)","")
-	${call _composer, "install" ${package}}
+	${call _composer, "install"}
 else
-  ${shell ./install_composer.sh}
-	${call _composer, "install" ${package}}
+	${shell ./install_composer.sh}
+	${call _composer, "install"}
 endif
 
-composer_update: ## Install all composer dependencies
+composer_update: ## Update all composer dependencies
 ifneq ("$(wildcard composer.phar)","")
-	${call _composer, "update" ${package}}
+	${call _composer, "update"}
 else
-  ${shell ./install_composer.sh}
-	${call _composer, "update" ${package}}
+	${shell ./install_composer.sh}
+	${call _composer, "update"}
 endif
 
 composer_require: ## Require a specific dependency. Usage: make composer_require package=composer/installers:1.9
