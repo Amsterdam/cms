@@ -58,8 +58,14 @@ Updating a module/package can be done by running
 make composer_update package=<package>
 ```
 
-The Drupal core version is handled by Composer. Updating the Drupal core to the latest stable version, can also be accomplished by running
+## Updating Drupal core
+
+The Drupal core version is handled by Composer. Updating the Drupal core to the latest stable version, can be accomplished by running
 
 ```
 make composer_update
 ```
+
+This wil update the main dependencies.
+
+To upgrade the Drupal core major version, both the Docker image name in the `Dockerfile` and the dependency versions in `composer.json` need to be changed from `8` to `9`.

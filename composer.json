@@ -56,7 +56,6 @@
         "drupal/consumers": "^1.11",
         "drupal/core-composer-scaffold": "^8",
         "drupal/core-project-message": "^8",
-        "drupal/core-recommended": "^8",
         "drupal/devel": "^4.0",
         "drupal/devel_entity_updates": "^3.0",
         "drupal/elasticsearch_connector": "^6.0",
