@@ -57,3 +57,9 @@ Updating a module/package can be done by running
 ```
 make composer_update package=<package>
 ```
+
+The Drupal core version is handled by Composer. Updating the Drupal core to the latest stable version, can also be accomplished by running
+
+```
+make composer_update
+```
