@@ -10,3 +10,4 @@ app/shared/*
 /.editorconfig
 /.gitattributes
 composer.phar
+.DS_Store

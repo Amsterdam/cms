@@ -6,7 +6,7 @@
 #  - the 'sites' volume is not an anonymous volume
 #  - the other volumes have been removed (as the CMS will be headless)
 
-version: '3.5'
+version: "3.5"
 
 services:
   imgproxy:
@@ -27,13 +27,14 @@ services:
 
   drupal:
     stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    build:
-      context: .
+    tty: true # docker run -t
+    build: .
     ports:
       - 80:80
     volumes:
-      - ./data/sites/default/:/app/shared/sites/default/
+      - ./app/config:/app/config
+      - ./app/shared/profiles:/app/shared/profiles
+      - ./data/sites/default:/app/shared/sites/default
     environment:
       DRUPAL_DBNAME: cms
       DRUPAL_DBHOST: database
@@ -47,6 +48,12 @@ services:
     depends_on:
       - database
       - imgproxy
+      - elasticsearch
+    command:
+      [
+        sh -c "cp /app/shared/sites/default/dev.services.yml /app/shared/sites/default/services.yml",
+        sh -c "drush updb -y && drush cache-rebuild",
+      ]
 
   database:
     image: amsterdam/postgres11
@@ -68,3 +75,5 @@ services:
       - "9300:9300"
     volumes:
       - "~/.ssh/datapunt.key:/root/.ssh/datapunt.key"
+    depends_on:
+      - database

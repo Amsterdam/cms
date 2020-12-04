@@ -1,12 +1,8 @@
 .DEFAULT_GOAL := help
 
 CONTAINER ?= drupal
-package ?= ""
-
-define _composer
-	${shell ./install_composer.sh}
-	@COMPOSER_MEMORY_LIMIT=-1 php ./composer.phar ${1} ${2}
-endef
+package ?=
+command ?= install
 
 # PHONY prevents filenames being used as targets
 .PHONY: help info rebuild status start stop restart build import_db shell
@@ -57,14 +53,9 @@ else
 	@echo -e "No filename given for database source file"
 endif
 
-composer_install: ## Install all composer dependencies
-	${call _composer, install}
-
-composer_update: ## Update all composer dependencies
-	${call _composer, update}
-
-composer_require: ## Require a specific dependency. Usage: make composer_require package=composer/installers:1.9
-	${call _composer, require ${package}}
+composer: ## Run composer command. Usage: make command=require package=composer/installers:1.9 composer. Run make composer to just install all dependencies
+	${shell ./install_composer.sh}
+	@COMPOSER_MEMORY_LIMIT=-1 php ./composer.phar ${command} ${package}
 
 drupal_update: ## Update all Drupal packages and related dependencies. When upgrading Drupal's core major version, make sure to use the same major version reference in both Dockerfile and composer.json
 	${call _composer, update drupal/core-* --with-all-dependencies}
