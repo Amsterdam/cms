@@ -67,6 +67,7 @@
         "drupal/jsonapi_extras": "^3.14",
         "drupal/paragraphs": "^1.12",
         "drupal/rest_absolute_urls": "^1.0@beta",
+        "drupal/search_api": "^1.17",
         "drupal/typed_data": "^1.0",
         "drupal/upgrade_status": "^3.0",
         "drupal/uuid_extra": "^2.0.0",
