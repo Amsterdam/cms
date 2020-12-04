@@ -1,11 +1,8 @@
 .DEFAULT_GOAL := help
 
 CONTAINER ?= drupal
-package ?= ""
-
-define _composer
-	@COMPOSER_MEMORY_LIMIT=-1 php ./composer.phar ${1} ${2}
-endef
+package ?=
+command ?= install
 
 # PHONY prevents filenames being used as targets
 .PHONY: help info rebuild status start stop restart build import_db shell
@@ -22,7 +19,7 @@ build_nocache: ## Build the container by pulling the image from source instead f
 build: ## build Docker Compose images
 	docker-compose build
 
-start: ## start single Docker Compose service in detached mode
+start: ## start single Docker Compose service in detached mode. Run make update after starting the container to flush Drupal cache
 	docker-compose up
 
 stop: ## stop Docker Compose
@@ -50,32 +47,15 @@ shell: ## execute command on container. Usage: make CONTAINER=database shell
 
 import_db: ## import postgres database. Usage: make DB_FILE=psql.gz import_db
 ifdef DB_FILE
-	@docker-compose exec -T database dropdb --if-exists -e -U postgres cms
+	## @docker-compose exec -T database dropdb --if-exists -e -U postgres cms
 	@docker-compose exec -T database pg_restore -C --clean --no-acl --no-owner --username=postgres -d postgres < ${DB_FILE}
 else
 	@echo -e "No filename given for database source file"
 endif
 
-composer_install: ## Install all composer dependencies
-ifneq ("$(wildcard composer.phar)","")
-	${call _composer, "install"}
-else
+composer: ## Run composer command. Usage: make command=require package=composer/installers:1.9 composer. Run make composer to just install all dependencies
 	${shell ./install_composer.sh}
-	${call _composer, "install"}
-endif
+	@COMPOSER_MEMORY_LIMIT=-1 php ./composer.phar ${command} ${package}
 
-composer_update: ## Update all composer dependencies
-ifneq ("$(wildcard composer.phar)","")
-	${call _composer, "update"}
-else
-	${shell ./install_composer.sh}
-	${call _composer, "update"}
-endif
-
-composer_require: ## Require a specific dependency. Usage: make composer_require package=composer/installers:1.9
-ifneq ("$(wildcard composer.phar)","")
-	${call _composer, "require" ${package}}
-else
-	${shell ./install_composer.sh}
-	${call _composer, "update" ${package}}
-endif
+drupal_update: ## Update all Drupal packages and related dependencies. When upgrading Drupal's core major version, make sure to use the same major version reference in both Dockerfile and composer.json
+	${call _composer, update drupal/core-* --with-all-dependencies}

@@ -35,11 +35,15 @@ An instance's configuration can be exported from `{{CMS_URL}}/admin/config/devel
 make import_config
 ```
 
-After importing the database of configuration, make sure to run the update command to fix any broken references:
+---
+__IMPORTANT__
+
+After spinning up the containers, Drupal requires that the cache be cleared, so after importing the database or configuration or even after rebuilding the containers, make sure to run the update command to fix any broken references:
 
 ```
 make update
 ```
+---
 
 ## Updating or requiring modules
 
