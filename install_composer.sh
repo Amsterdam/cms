@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if [ -f ./composer.phar ]; then
+    exit 0
+fi
+
+>&2 echo 'Installing composer'
+
 EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"

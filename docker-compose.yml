@@ -28,12 +28,12 @@ services:
   drupal:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
-    build: .
+    build:
+      context: .
     ports:
       - 80:80
     volumes:
-      - ./app/config:/app/config
-      - ./app/shared/profiles:/app/shared/profiles
+      - ./data/sites/default/:/app/shared/sites/default/
     environment:
       DRUPAL_DBNAME: cms
       DRUPAL_DBHOST: database
