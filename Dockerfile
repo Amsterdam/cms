@@ -46,4 +46,7 @@ RUN mkdir /var/log/apache2/drupal/
 COPY data/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod proxy proxy_http cache_disk headers
 
+ARG DEPLOY_ENV=prod
+ENV DEPLOY_ENV=${DEPLOY_ENV}
+
 CMD [ "/entrypoint.sh" ]
