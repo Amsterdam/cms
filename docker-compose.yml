@@ -28,7 +28,8 @@ services:
   drupal:
     stdin_open: true # docker run -i
     tty: true # docker run -t
-    build: .
+    build:
+      context: .
     ports:
       - 80:80
     volumes:
@@ -51,7 +52,7 @@ services:
       - elasticsearch
     command:
       [
-        sh -c "cp /app/shared/sites/default/dev.services.yml /app/shared/sites/default/services.yml",
+        sh -c "sleep 60 && cp /app/shared/sites/default/dev.services.yml /app/shared/sites/default/services.yml",
         sh -c "drush updb -y && drush cache-rebuild",
       ]
 
