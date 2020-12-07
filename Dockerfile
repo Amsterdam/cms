@@ -38,15 +38,12 @@ RUN \
 RUN rm -rf ./themes && \
   ln -s /app/themes ./themes
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod 755 ./entrypoint.sh
 
 RUN mkdir /var/log/apache2/drupal/
 
-COPY data/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY ./data/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod proxy proxy_http cache_disk headers
 
-ARG DEPLOY_ENV=prod
-ENV DEPLOY_ENV=${DEPLOY_ENV}
-
-CMD [ "/entrypoint.sh" ]
+ENTRYPOINT "./entrypoint.sh"

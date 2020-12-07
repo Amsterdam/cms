@@ -30,8 +30,6 @@ services:
     tty: true # docker run -t
     build:
       context: .
-      args:
-        - DEPLOY_ENV=dev
     ports:
       - 80:80
     volumes:
@@ -52,6 +50,11 @@ services:
       - database
       - imgproxy
       - elasticsearch
+    command:
+      [
+        sh -c "sleep 60 && cp /app/shared/sites/default/dev.services.yml /app/shared/sites/default/services.yml",
+        sh -c "drush updb -y && drush cache-rebuild",
+      ]
 
   database:
     image: amsterdam/postgres11
