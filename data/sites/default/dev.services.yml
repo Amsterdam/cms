@@ -1,0 +1,20 @@
+parameters:
+  cors.config:
+    enabled: true
+    allowedHeaders:
+      [
+        "accept",
+        "accept-encoding",
+        "content-type",
+        "content-encoding",
+        "connection",
+        "authorization",
+        "origin",
+        "cookie",
+        "X-Requested-With",
+      ]
+    allowedMethods: ["*"]
+    allowedOrigins: ["*"]
+    exposedHeaders: false
+    maxAge: false
+    supportsCredentials: true
