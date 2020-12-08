@@ -38,7 +38,7 @@ make import_config
 ---
 __IMPORTANT__
 
-After spinning up the containers, Drupal requires that the cache be cleared, so after importing the database or configuration or even after rebuilding the containers, make sure to run the update command to fix any broken references:
+After spinning importing a database or a set of configuration files, there can be a mismatch between the two and Drupal requires that the cache be cleared. When running into issues after importing the database or configuration, try to run the update command to fix any broken references:
 
 ```
 make update
@@ -51,7 +51,7 @@ Drupal modules are not included in the repository's file structure, but instead 
 New modules can be required by running
 
 ```
-make composer_require package=<package>
+make composer command=require package=<package>
 ```
 
 where `<package>` takes the form `foo/bar` or `foo/bar:1.0.0` or `foo/bar=1.0.0` or `"foo/bar 1.0.0"`.
@@ -59,17 +59,17 @@ where `<package>` takes the form `foo/bar` or `foo/bar:1.0.0` or `foo/bar=1.0.0`
 Updating a module/package can be done by running
 
 ```
-make composer_update package=<package>
+make composer command=update package=<package>
 ```
 
 ## Updating Drupal core
 
-The Drupal core version is handled by Composer. Updating the Drupal core to the latest stable version, can be accomplished by running
+The Drupal core version is handled by Composer. Updating the Drupal core to the latest stable version can be accomplished by running
 
 ```
-make composer_update
+make drupal_update
 ```
 
 This wil update the main dependencies.
 
-To upgrade the Drupal core major version, both the Docker image name in the `Dockerfile` and the dependency versions in `composer.json` need to be changed from `8` to `9`.
+To upgrade the Drupal core major version, both the Docker image name in the `Dockerfile` and the dependency versions in `composer.json` need to be changed from `8` to `9` (or whichever major version applies)

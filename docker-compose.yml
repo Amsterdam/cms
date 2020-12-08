@@ -5,8 +5,7 @@
 #  - environment variables are defined (to be read by Drupal's settings.php)
 #  - the 'sites' volume is not an anonymous volume
 #  - the other volumes have been removed (as the CMS will be headless)
-
-version: "3.5"
+version: "3.8"
 
 services:
   imgproxy:
@@ -32,10 +31,6 @@ services:
       context: .
     ports:
       - 80:80
-    volumes:
-      - ./app/config:/app/config
-      - ./app/shared/profiles:/app/shared/profiles
-      - ./data/sites/default:/app/shared/sites/default
     environment:
       DRUPAL_DBNAME: cms
       DRUPAL_DBHOST: database
