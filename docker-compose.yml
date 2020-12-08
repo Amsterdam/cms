@@ -1,10 +1,3 @@
-# Drupal with PostgreSQL and Elasticsearch
-#
-# This is a close copy of an example at https://hub.docker.com/_/drupal
-# Differences:
-#  - environment variables are defined (to be read by Drupal's settings.php)
-#  - the 'sites' volume is not an anonymous volume
-#  - the other volumes have been removed (as the CMS will be headless)
 version: "3.8"
 
 services:
@@ -13,13 +6,13 @@ services:
       - 9091:8080
     image: darthsim/imgproxy
     volumes:
+      # imgproxy needs to share the same part of the file system that is used by the drupal container
       - ./app/shared/sites:/app/shared/sites
     restart: always
     environment:
       IMGPROXY_JPEG_PROGRESSIVE: 1
       IMGPROXY_ENABLE_WEBP_DETECTION: 1
       IMGPROXY_ENFORCE_WEBP: 1
-      IMGPROXY_ALLOW_ORIGIN: https://*.data.amsterdam.nl
       IMGPROXY_PNG_INTERLACED: 1
       IMGPROXY_LOCAL_FILESYSTEM_ROOT: /app/shared/
       IMGPROXY_BASE_URL: local:/// # only look at local files, therefore no URL signatures are needed
@@ -50,6 +43,8 @@ services:
         sh -c "sleep 60 && cp /app/shared/sites/default/dev.services.yml /app/shared/sites/default/services.yml",
         sh -c "drush updb -y && drush cache-rebuild",
       ]
+    volumes:
+      - ./app/shared/sites:/app/shared/sites
 
   database:
     image: amsterdam/postgres11
