@@ -39,7 +39,7 @@ RUN rm -rf ./themes && \
   ln -s /app/themes ./themes
 
 COPY entrypoint.sh ./entrypoint.sh
-RUN chmod 755 ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
 RUN mkdir /var/log/apache2/drupal/
 
