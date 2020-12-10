@@ -62,14 +62,22 @@ Updating a module/package can be done by running
 make composer command=update package=<package>
 ```
 
+## Removing modules
+
+Modules (or plugins) can have entries in the database and will need to be uninstalled in the CMS' UI before they are removed from the `composer.json` file.
+
 ## Updating Drupal core
 
-The Drupal core version is handled by Composer. Updating the Drupal core to the latest stable version can be accomplished by running
+The Drupal core version is handled by Composer. Updating the Drupal core to the latest stable (minor or patch) version can be accomplished by running
 
 ```
 make drupal_update
 ```
 
-This wil update the main dependencies.
+## Upgrading Drupal core
 
-To upgrade the Drupal core major version, both the Docker image name in the `Dockerfile` and the dependency versions in `composer.json` need to be changed from `8` to `9` (or whichever major version applies)
+To upgrade the Drupal core major version, a couple of steps need to be taken:
+
+1. Change the Docker image name in the `Dockerfile`
+2. Update the versions in `composer.json` of the `drupal/core-*` dependencies and run `make composer command=update`
+3. Change the version reference in the `dataportaal.theme` file in the `themes/custom/dataportaal/templates` folder
