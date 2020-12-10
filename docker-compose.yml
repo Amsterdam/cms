@@ -31,13 +31,13 @@ services:
       DRUPAL_USERNAME: cms
       DRUPAL_PASSWORD: insecure
       DRUPAL_HASH_SALT: salt
-    links:
-      - elasticsearch:elastic-index.service.consul
-      - imgproxy:imgproxy
+    # links:
+    #   - elasticsearch:elastic-index.service.consul
+    #   - imgproxy:imgproxy
     depends_on:
       - database
       - imgproxy
-      - elasticsearch
+      # - elasticsearch
     command:
       [
         sh -c "sleep 60 && cp /app/shared/sites/default/dev.services.yml /app/shared/sites/default/services.yml",
@@ -49,13 +49,12 @@ services:
   database:
     image: amsterdam/postgres11
     ports:
-      - "5434:5432"
+      - "5432:5432"
     environment:
       POSTGRES_DB: cms
       POSTGRES_USER: cms
       POSTGRES_PASSWORD: insecure
     volumes:
-      - "~/.ssh/datapunt.key:/root/.ssh/datapunt.key"
       - ./db:/var/lib/postgresql/data
 
   elasticsearch:
@@ -64,7 +63,5 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
-    volumes:
-      - "~/.ssh/datapunt.key:/root/.ssh/datapunt.key"
     depends_on:
       - database

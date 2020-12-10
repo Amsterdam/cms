@@ -57,4 +57,5 @@ composer: ## Run composer command. Usage: make command=require package=composer/
 	@COMPOSER_MEMORY_LIMIT=-1 php ./composer.phar ${command} ${package}
 
 drupal_update: ## Update all Drupal packages and related dependencies. When upgrading Drupal's core major version, make sure to use the same major version reference in both Dockerfile and composer.json
-	${call _composer, update drupal/core-* --with-all-dependencies}
+	${shell ./install_composer.sh}
+	@COMPOSER_MEMORY_LIMIT=-1 php ./composer.phar update drupal/core-* --with-all-dependencies
