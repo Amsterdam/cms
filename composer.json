@@ -72,6 +72,6 @@
         "drupal/uuid_extra": "^2.0.0",
         "drush/drush": "^10.3",
         "nodespark/des-connector": "^6.0",
-        "webonyx/graphql-php": "v14.3.0"
+        "webonyx/graphql-php": "v14.4.0"
     }
 }
