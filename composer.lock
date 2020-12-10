@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "664e33ee910d5c88c9d3e395d57f90fa",
+    "content-hash": "939db1d94d758b2f1a1b252e6a5fd2be",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2895,21 +2895,21 @@
         },
         {
             "name": "drupal/core-project-message",
-            "version": "8.9.11",
+            "version": "9.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-project-message.git",
-                "reference": "3f8fa28128f1fef68ee0e6647011a543ef92be5b"
+                "reference": "812d6da43dd49cc210af62e80fa92189e68e565a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-project-message/zipball/3f8fa28128f1fef68ee0e6647011a543ef92be5b",
-                "reference": "3f8fa28128f1fef68ee0e6647011a543ef92be5b",
+                "url": "https://api.github.com/repos/drupal/core-project-message/zipball/812d6da43dd49cc210af62e80fa92189e68e565a",
+                "reference": "812d6da43dd49cc210af62e80fa92189e68e565a",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.1 || ^2",
-                "php": ">=7.0.8"
+                "php": ">=7.3.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -2929,7 +2929,7 @@
             "keywords": [
                 "drupal"
             ],
-            "time": "2020-08-02T22:04:49+00:00"
+            "time": "2020-09-14T13:40:36+00:00"
         },
         {
             "name": "drupal/devel",
