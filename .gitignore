@@ -3,6 +3,7 @@ app/shared/*
 /data/sites/default/files
 /app/config/
 /web
+/vendor
 /profiles
 /sites
 /themes
