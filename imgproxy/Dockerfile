@@ -1,1 +1,1 @@
-FROM darthsim/imgproxy:latest
+FROM darthsim/imgproxy:v2.15
