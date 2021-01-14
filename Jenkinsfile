@@ -6,7 +6,6 @@ def tryStep(String message, Closure block, Closure tearDown = null) {
     }
     catch (Throwable t) {
         slackSend message: "${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}", channel: '#ci-channel', color: 'danger'
-
         throw t
     }
     finally {
@@ -26,8 +25,20 @@ node {
         tryStep "build", {
             wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
                 docker.withRegistry("${DOCKER_REGISTRY_HOST}",'docker_registry_auth') {
-                    def image = docker.build("datapunt/cms:${env.BUILD_NUMBER}")
-                    image.push()
+                    docker.build("datapunt/cms:${env.BUILD_NUMBER}").push()
+                }
+            }
+        }
+    }
+    stage("Build & push imgproxy") {
+        tryStep "build", {
+            wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
+                docker.withRegistry("${DOCKER_REGISTRY_HOST}",'docker_registry_auth') {
+                    def image = docker.build("datapunt/cms-imgproxy:${env.BUILD_NUMBER}", "imgproxy")
+                    // We use the same version (=latest docker image) of imgproxy on all environments.
+                    image.push("latest")
+                    image.push("acceptance")
+                    image.push("production")
                 }
             }
         }
@@ -57,7 +68,8 @@ if (BRANCH == "master") {
                 build job: 'Subtask_Openstack_Playbook',
                 parameters: [
                     [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-cms.yml'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy.yml'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOKPARAMS', value: "-e cmdb_id=app_cms"]
                 ]
             }
         }
@@ -87,7 +99,8 @@ if (BRANCH == "master") {
                 build job: 'Subtask_Openstack_Playbook',
                 parameters: [
                     [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
-                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-cms.yml'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy.yml'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOKPARAMS', value: "-e cmdb_id=app_cms"]
                 ]
             }
         }
