@@ -52,7 +52,7 @@
         "drupal/backup_migrate": "^4.1",
         "drupal/config_update": "^1.7",
         "drupal/console": "^1.9.5",
-        "drupal/consumer_image_styles": "^3.0",
+        "drupal/consumer_image_styles": "^4.0",
         "drupal/consumers": "^1.11",
         "drupal/core-composer-scaffold": "^8",
         "drupal/core-project-message": "^9",
