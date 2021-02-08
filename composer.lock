@@ -3816,20 +3816,20 @@
         },
         {
             "name": "drupal/upgrade_status",
-            "version": "3.1.0",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/upgrade_status.git",
-                "reference": "8.x-3.1"
+                "reference": "8.x-3.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/upgrade_status-8.x-3.1.zip",
-                "reference": "8.x-3.1",
-                "shasum": "1f1872a553065c0c6f6353ed2766ada1f583976d"
+                "url": "https://ftp.drupal.org/files/projects/upgrade_status-8.x-3.4.zip",
+                "reference": "8.x-3.4",
+                "shasum": "75d56ca9ae59da6e47c71b9f28e9df1ac502b22d"
             },
             "require": {
-                "drupal/core": "^8",
+                "drupal/core": "^8.7.0",
                 "mathieuviossat/arraytotexttable": "~1.0.0",
                 "mglaman/phpstan-drupal": "^0.12.7",
                 "nikic/php-parser": "^4.0.0",
@@ -3839,8 +3839,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.1",
-                    "datestamp": "1608580905",
+                    "version": "8.x-3.4",
+                    "datestamp": "1612379526",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5136,24 +5136,28 @@
         },
         {
             "name": "laminas/laminas-servicemanager",
-            "version": "3.5.1",
+            "version": "3.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-servicemanager.git",
-                "reference": "0d4c8628a71fae9f7bd0b1b74b76382e5e9a04b1"
+                "reference": "b1445e1a7077c21b0fad0974a1b7a11b9dbe0828"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/0d4c8628a71fae9f7bd0b1b74b76382e5e9a04b1",
-                "reference": "0d4c8628a71fae9f7bd0b1b74b76382e5e9a04b1",
+                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/b1445e1a7077c21b0fad0974a1b7a11b9dbe0828",
+                "reference": "b1445e1a7077c21b0fad0974a1b7a11b9dbe0828",
                 "shasum": ""
             },
             "require": {
                 "container-interop/container-interop": "^1.2",
                 "laminas/laminas-stdlib": "^3.2.1",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^5.6 || ^7.0",
+                "php": "^7.3 || ~8.0.0",
                 "psr/container": "^1.0"
+            },
+            "conflict": {
+                "laminas/laminas-code": "<3.3.1",
+                "zendframework/zend-code": "<3.3.1"
             },
             "provide": {
                 "container-interop/container-interop-implementation": "^1.2",
@@ -5163,27 +5167,24 @@
                 "zendframework/zend-servicemanager": "^3.4.0"
             },
             "require-dev": {
+                "composer/package-versions-deprecated": "^1.0",
                 "laminas/laminas-coding-standard": "~1.0.0",
-                "mikey179/vfsstream": "^1.6.5",
-                "ocramius/proxy-manager": "^1.0 || ^2.0",
-                "phpbench/phpbench": "^0.13.0",
-                "phpunit/phpunit": "^5.7.25 || ^6.4.4"
+                "laminas/laminas-container-config-test": "^0.3",
+                "laminas/laminas-dependency-plugin": "^2.1",
+                "mikey179/vfsstream": "^1.6.8",
+                "ocramius/proxy-manager": "^2.2.3",
+                "phpbench/phpbench": "^1.0.0-alpha3",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.4"
             },
             "suggest": {
-                "laminas/laminas-stdlib": "laminas-stdlib ^2.5 if you wish to use the MergeReplaceKey or MergeRemoveKey features in Config instances",
-                "ocramius/proxy-manager": "ProxyManager 1.* to handle lazy initialization of services"
+                "ocramius/proxy-manager": "ProxyManager ^2.1.1 to handle lazy initialization of services"
             },
             "bin": [
                 "bin/generate-deps-for-config-factory",
                 "bin/generate-factory-for-class"
             ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3-dev",
-                    "dev-develop": "4.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\ServiceManager\\": "src/"
@@ -5218,7 +5219,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-05-11T14:43:22+00:00"
+            "time": "2021-02-03T08:44:41+00:00"
         },
         {
             "name": "laminas/laminas-stdlib",
@@ -5629,16 +5630,16 @@
         },
         {
             "name": "mglaman/phpstan-drupal",
-            "version": "0.12.7",
+            "version": "0.12.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mglaman/phpstan-drupal.git",
-                "reference": "9c53a7be3f1b92766046469e2bf2e5f1cbfa0276"
+                "reference": "7598084f8a0d6de21015faa9e2151cc4540f4344"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/9c53a7be3f1b92766046469e2bf2e5f1cbfa0276",
-                "reference": "9c53a7be3f1b92766046469e2bf2e5f1cbfa0276",
+                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/7598084f8a0d6de21015faa9e2151cc4540f4344",
+                "reference": "7598084f8a0d6de21015faa9e2151cc4540f4344",
                 "shasum": ""
             },
             "require": {
@@ -5706,7 +5707,7 @@
             "description": "Drupal extension and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/mglaman/phpstan-drupal/issues",
-                "source": "https://github.com/mglaman/phpstan-drupal/tree/0.12.7"
+                "source": "https://github.com/mglaman/phpstan-drupal/tree/0.12.8"
             },
             "funding": [
                 {
@@ -5722,7 +5723,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-21T13:42:17+00:00"
+            "time": "2021-02-05T01:40:26+00:00"
         },
         {
             "name": "nette/finder",
@@ -5793,16 +5794,16 @@
         },
         {
             "name": "nette/utils",
-            "version": "v3.2.0",
+            "version": "v3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "d0427c1811462dbb6c503143eabe5478b26685f7"
+                "reference": "2bc2f58079c920c2ecbb6935645abf6f2f5f94ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/d0427c1811462dbb6c503143eabe5478b26685f7",
-                "reference": "d0427c1811462dbb6c503143eabe5478b26685f7",
+                "url": "https://api.github.com/repos/nette/utils/zipball/2bc2f58079c920c2ecbb6935645abf6f2f5f94ba",
+                "reference": "2bc2f58079c920c2ecbb6935645abf6f2f5f94ba",
                 "shasum": ""
             },
             "require": {
@@ -5872,9 +5873,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v3.2.0"
+                "source": "https://github.com/nette/utils/tree/v3.2.1"
             },
-            "time": "2020-11-25T23:47:50+00:00"
+            "time": "2021-01-11T03:05:59+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -6221,16 +6222,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.64",
+            "version": "0.12.73",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "23eb1cb7ae125f45f1d0e48051bcf67a9a9b08aa"
+                "reference": "a08c2759d132b4247b32e03066401c3232ad99b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/23eb1cb7ae125f45f1d0e48051bcf67a9a9b08aa",
-                "reference": "23eb1cb7ae125f45f1d0e48051bcf67a9a9b08aa",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a08c2759d132b4247b32e03066401c3232ad99b7",
+                "reference": "a08c2759d132b4247b32e03066401c3232ad99b7",
                 "shasum": ""
             },
             "require": {
@@ -6261,7 +6262,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.64"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.73"
             },
             "funding": [
                 {
@@ -6277,7 +6278,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-21T11:59:02+00:00"
+            "time": "2021-02-07T16:26:54+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
