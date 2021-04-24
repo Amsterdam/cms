@@ -1406,40 +1406,39 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "1.10.2",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "13e3381b25847283a91948d04640543941309727"
+                "reference": "a9c1b59eba5a08ca2770a76eddb88922f504e8e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/13e3381b25847283a91948d04640543941309727",
-                "reference": "13e3381b25847283a91948d04640543941309727",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/a9c1b59eba5a08ca2770a76eddb88922f504e8e0",
+                "reference": "a9c1b59eba5a08ca2770a76eddb88922f504e8e0",
                 "shasum": ""
             },
             "require": {
                 "php": "~7.1 || ^8.0"
             },
             "conflict": {
-                "doctrine/common": ">2.2,<2.4"
+                "doctrine/common": ">2.2,<2.4",
+                "psr/cache": ">=3"
             },
             "require-dev": {
                 "alcaeus/mongo-php-adapter": "^1.1",
-                "doctrine/coding-standard": "^6.0",
+                "cache/integration-tests": "dev-master",
+                "doctrine/coding-standard": "^8.0",
                 "mongodb/mongodb": "^1.1",
-                "phpunit/phpunit": "^7.0",
-                "predis/predis": "~1.0"
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
+                "predis/predis": "~1.0",
+                "psr/cache": "^1.0 || ^2.0",
+                "symfony/cache": "^4.4 || ^5.2"
             },
             "suggest": {
                 "alcaeus/mongo-php-adapter": "Required to use legacy MongoDB driver"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
@@ -1498,7 +1497,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-07T18:54:01+00:00"
+            "time": "2021-04-13T14:46:17+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -2569,16 +2568,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.9.13",
+            "version": "8.9.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "a53db77b55a035453d7229e0c3069f8591cb4cb6"
+                "reference": "84796e158cd3bd50af08974dd62931d0cc78dc7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/a53db77b55a035453d7229e0c3069f8591cb4cb6",
-                "reference": "a53db77b55a035453d7229e0c3069f8591cb4cb6",
+                "url": "https://api.github.com/repos/drupal/core/zipball/84796e158cd3bd50af08974dd62931d0cc78dc7e",
+                "reference": "84796e158cd3bd50af08974dd62931d0cc78dc7e",
                 "shasum": ""
             },
             "require": {
@@ -2796,7 +2795,7 @@
                 "GPL-2.0-or-later"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2021-01-19T23:11:00+00:00"
+            "time": "2021-04-20T23:05:40+00:00"
         },
         {
             "name": "drupal/core-composer-scaffold",
@@ -3237,26 +3236,30 @@
         },
         {
             "name": "drupal/feeds",
-            "version": "3.0.0-alpha9",
+            "version": "3.0.0-alpha10",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/feeds.git",
-                "reference": "8.x-3.0-alpha9"
+                "reference": "8.x-3.0-alpha10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/feeds-8.x-3.0-alpha9.zip",
-                "reference": "8.x-3.0-alpha9",
-                "shasum": "47b56b3d7353d900c500e74178fbdea837199394"
+                "url": "https://ftp.drupal.org/files/projects/feeds-8.x-3.0-alpha10.zip",
+                "reference": "8.x-3.0-alpha10",
+                "shasum": "84691c6258503c8d4afea5009dcd21bbd8292d49"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
             },
+            "require-dev": {
+                "drupal/pathauto": "^1.8",
+                "drush/drush": "^9 || ^10"
+            },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.0-alpha9",
-                    "datestamp": "1611312267",
+                    "version": "8.x-3.0-alpha10",
+                    "datestamp": "1612455136",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
