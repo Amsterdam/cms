@@ -49,7 +49,7 @@
     },
     "require": {
         "composer/installers": "^1.8",
-        "drupal/backup_migrate": "^4.1",
+        "drupal/backup_migrate": "^5.0",
         "drupal/config_update": "^1.7",
         "drupal/console": "^1.9.5",
         "drupal/consumer_image_styles": "^3.0",
