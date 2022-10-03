@@ -72,7 +72,7 @@
         "drupal/upgrade_status": "^3.0",
         "drupal/uuid_extra": "^2.0.0",
         "drupal/views_bulk_edit": "^2.5",
-        "drupal/views_bulk_operations": "^3.9",
+        "drupal/views_bulk_operations": "^4.1",
         "drush/drush": "^10.3",
         "nodespark/des-connector": "^6.0",
         "webonyx/graphql-php": "v14.7.0"
