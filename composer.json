@@ -75,6 +75,6 @@
         "drupal/views_bulk_operations": "^3.9",
         "drush/drush": "^10.3",
         "nodespark/des-connector": "^6.0",
-        "webonyx/graphql-php": "v14.7.0"
+        "webonyx/graphql-php": "v15.0.0"
     }
 }
